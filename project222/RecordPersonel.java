@@ -17,5 +17,13 @@ public class RecordPersonel extends Person{
     public RecordPersonel(String name, String surname, String id, Date dateOfBirth) {
         super(name, surname, id, dateOfBirth);
     }
+
+    public void addPatient(Patients patient){
+        Company.patientsData.add(patient);
+    }
+
+    public void removePatient(Patients patient){
+        Company.patientsData.remove(patient);
+    }
     
 }

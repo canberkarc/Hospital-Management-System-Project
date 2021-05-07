@@ -6,6 +6,7 @@
 package project222;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -17,6 +18,7 @@ public class SurgeryRoom extends Departments{
     private ArrayList<Nurse> nurses = new ArrayList<>();
     private Patients patient;
     private String surgeryName;
+    Date surgeryDate;
     
     public ArrayList<Doctor> getDoctors() {
         return doctors;
@@ -54,12 +56,16 @@ public class SurgeryRoom extends Departments{
         super(id);
     }
     
-    public SurgeryRoom(int id, ArrayList<Doctor> doctors, ArrayList<Nurse> nurses, Patients patient, String surgeryName) {
+    public SurgeryRoom(int id, ArrayList<Doctor> doctors, ArrayList<Nurse> nurses, Patients patient, String surgeryName, Date surgeryDate) {
         super(id);
     	this.doctors = doctors;
     	this.nurses = nurses;
         this.patient = patient;
         this.surgeryName = surgeryName;
+        this.surgeryDate = surgeryDate;
     }
-    
+
+    public boolean doSurgery() {
+        // returns true if surgery completed successfully.
+    } 
 }

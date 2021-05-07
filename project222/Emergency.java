@@ -42,6 +42,6 @@ public class Emergency extends Departments{
     }
 
     public boolean intervention() {
-        // returns true if surgery completed successfully.
+        // wıll be filled
     } 
 }

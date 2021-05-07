@@ -6,6 +6,7 @@
 package project222;
 
 import java.util.Date;
+import java.util.PriorityQueue;
 import java.util.UUID;
 
 /**
@@ -13,10 +14,16 @@ import java.util.UUID;
  * @author omera
  */
 public class Doctor extends Person{
+    private PriorityQueue<Appointment> appointment;
 
     public Doctor(String name, String surname, String id, Date dateOfBirth) {
         super(name, surname, id, dateOfBirth);
+        appointment = new PriorityQueue<>();
+        Company.appointmets.add(appointment);
     }
     
-    
+    public boolean addAppointment(Appointment app){
+        appointment.offer(app);
+        return true;
+    }
 }

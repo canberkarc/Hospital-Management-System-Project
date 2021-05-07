@@ -54,7 +54,8 @@ public class SurgeryRoom extends Departments{
         super(id);
     }
     
-    public public SurgeryRoom(ArrayList<Doctor> doctors, ArrayList<Nurse> nurses, Patients patient, String surgeryName) {
+    public SurgeryRoom(int id, ArrayList<Doctor> doctors, ArrayList<Nurse> nurses, Patients patient, String surgeryName) {
+        super(id);
     	this.doctors = doctors;
     	this.nurses = nurses;
         this.patient = patient;

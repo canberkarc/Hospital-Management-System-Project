@@ -1,18 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package project222;
+public class Lab extends Departments
+{
+	private ArrayList<LabPersonnel> labWorkers;
+	private Queue<Patient> patientsToTest;
+	private Stack<Test> testHistory;
 
-/**
- *
- * @author 
- */
-public class Lab extends Departments{
-    
-    public Lab(int id) {
-        super(id);
-    }
-    
+	public void addPatientToQueue(Patient p)
+	{
+	}
+
+	public void addLabPersonnel(LabPersonnel l)
+	{
+	}
+
+	public void addTest(Test t)
+	{
+	}
+
+	Stack<Test> getTests()
+	{
+	}
+
+	LabPersonnel getLabPersonnel(String id)
+	{
+	}
+
 }

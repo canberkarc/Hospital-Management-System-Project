@@ -18,4 +18,20 @@ public class Nurse extends Person{
         super(name, surname, id, dateOfBirth);
     }
     
+    public void patientRecords(Patients patient) {
+    	
+    }
+    
+    public void updatePatientInfo(Patients patient) {
+    	
+    }
+    
+    public void vaccinate(Patients patient) {
+    	
+    }
+    
+    public void covidTest(Patients patient) {
+    	
+    }
+        
 }

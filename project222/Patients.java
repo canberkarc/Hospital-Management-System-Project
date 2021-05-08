@@ -26,4 +26,20 @@ public class Patients extends Person{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public void showRecords() {
+    	
+    }
+    
+    public void showReciepe() {
+    	
+    }
+    
+    public void makeAppointment(Doctor doctor) {
+    	
+    }
+    
+    public void showPoliclinics() {
+    	
+    }
+    
 }

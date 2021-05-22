@@ -1,4 +1,5 @@
 package project222;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -163,31 +164,34 @@ public class Policlinic extends Departments{
         return patients.remove(index);
     }
 
-    public void viewDoctors() {
-        System.out.println("---------------Doctor List:");
+    public String viewDoctors() {
+        String result = "---------------Doctor List:\n";
         if (doctors.size() == 0)
-            System.out.println("-");
+            return result + "-";
         for (int i = 0; i < doctors.size(); ++i) {
-            System.out.println(i + ". " + doctors.get(i).getName());
+            result += i + ". " + doctors.get(i).getName() + "\n";
         }
+        return result;
     }
 
-    public void viewNurses() {
-        System.out.println("---------------Nurse List:");
+    public String viewNurses() {
+        String result = "---------------Nurse List:\n";
         if (nurses.size() == 0)
-            System.out.println("-");
+            return result + "-";
         for (int i = 0; i < nurses.size(); ++i) {
-            System.out.println(i + ". " + nurses.get(i).getName());
+            result += i + ". " + nurses.get(i).getName() + "\n";
         }
+        return result;
     }
 
-    public void viewPatients() {
-        System.out.println("---------------Patient List:");
+    public String viewPatients() {
+        String result = "---------------Patient List:\n";
         if (patients.size() == 0)
-            System.out.println("-");
+            return result + "-";
         for (int i = 0; i < patients.size(); ++i) {
-            System.out.println(i + ". " + patients.get(i).getName());
+            result += i + ". " + patients.get(i).getName() + "\n";
         }
+        return result;
     }
 
     public boolean searchDoctor (Doctor doctor) {

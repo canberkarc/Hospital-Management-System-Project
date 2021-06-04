@@ -12,10 +12,10 @@ import java.util.UUID;
  *
  * @author grup15
  */
-public abstract class Person implements Comparable<Object>{
+public abstract class Person implements Comparable<Object> {
     private String name;
     private String surname;
-    private String id; // UUID sameUuid = UUID. fromString(uuidAsString);
+    private String id;
     private Date dateOfBirth;
     
 

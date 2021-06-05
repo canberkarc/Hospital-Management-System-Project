@@ -26,4 +26,11 @@ public class RecordPersonel extends HospitalWorkers{
         Company.patientsData.remove(patient);
     }
     
+    @Override
+    public String saveFormat() {
+        StringBuilder strBuild = new StringBuilder(super.saveFormat());
+        strBuild.append(";");
+        strBuild.append("R");
+        return strBuild.toString();
+    }
 }

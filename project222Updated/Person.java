@@ -5,6 +5,7 @@
  */
 package project222;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -12,7 +13,7 @@ import java.util.UUID;
  *
  * @author grup15
  */
-public abstract class Person implements Comparable<Object> {
+public abstract class Person implements Comparable<Object>, DatabaseComponent {
     private String name;
     private String surname;
     private String id;
@@ -92,5 +93,14 @@ public abstract class Person implements Comparable<Object> {
     
     
     
-    
+    @Override
+    public String saveFormat() {
+        SimpleDateFormat sformat = new SimpleDateFormat("dd-MM-yyyy");
+        StringBuilder strBuild = new StringBuilder();
+        strBuild.append(getName()).append(";").
+                append(getSurname()).append(";").
+                append(getId()).append(";").
+                append(sformat.format(getDateOfBirth()));
+        return strBuild.toString();
+    }
 }

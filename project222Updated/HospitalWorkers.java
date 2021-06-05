@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//package project222;
+package project222;
 
 import java.util.Date;
 import java.util.UUID;
@@ -51,4 +51,11 @@ public abstract class HospitalWorkers extends Person{
         return super.toString() + " email=" + email;
     }
     
+    @Override
+    public String saveFormat() {
+        StringBuilder strBuild = new StringBuilder(super.saveFormat());
+        strBuild.append(";");
+        strBuild.append(getEmail()).append(";").append(getPassword());
+        return strBuild.toString();
+    }
 }

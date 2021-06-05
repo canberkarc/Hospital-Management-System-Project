@@ -29,5 +29,12 @@ public class Nurse extends HospitalWorkers{
     public void covidTest(Patients patient,String result) {
     	patient.setCovid(result);
     }
-        
+     
+    @Override
+    public String saveFormat() {
+        StringBuilder strBuild = new StringBuilder(super.saveFormat());
+        strBuild.append(";");
+        strBuild.append("N");
+        return strBuild.toString();
+    }
 }

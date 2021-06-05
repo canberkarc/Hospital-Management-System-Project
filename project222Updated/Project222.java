@@ -5,6 +5,7 @@
  */
 package project222;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
@@ -19,6 +20,12 @@ public class Project222 {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws ParseException {
+        try {
+            Company.loadPersons();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         Doctor doctor = new Doctor("ali", "veli", "1", new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998"), "1", "1");
         Nurse nurse = new Nurse("ali", "veli", "1", new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998"), "2", "2");
         LabPersonnel labpers = new LabPersonnel("ali", "veli", "1", new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998"), "3", "3");

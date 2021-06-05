@@ -34,4 +34,11 @@ public class Doctor extends HospitalWorkers{
     public void dischargePatient(Appointment appo , String note){
         appo.getPatient().setDischarged(true);
     }
+    @Override
+    public String saveFormat() {
+        StringBuilder strBuild = new StringBuilder(super.saveFormat());
+        strBuild.append(";");
+        strBuild.append("D");
+        return strBuild.toString();
+    }
 }

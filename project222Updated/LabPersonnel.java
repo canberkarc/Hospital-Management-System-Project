@@ -213,4 +213,12 @@ public class LabPersonnel extends HospitalWorkers
 	
 	}
 
+	@Override
+    public String saveFormat() {
+        StringBuilder strBuild = new StringBuilder(super.saveFormat());
+        strBuild.append(";");
+        strBuild.append("L");
+        return strBuild.toString();
+    }
+
 }

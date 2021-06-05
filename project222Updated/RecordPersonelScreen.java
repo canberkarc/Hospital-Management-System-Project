@@ -24,7 +24,7 @@ public class RecordPersonelScreen extends javax.swing.JFrame {
         
         for(int i = 0;i<Company.persons.size();i++){
             if(Company.persons.get(i) instanceof Patients){
-                patients.addItem(((Patients)Company.persons.get(i)));
+                patients.addItem((Company.persons.get(i).toString()));
             }
         }
         

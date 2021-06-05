@@ -5,6 +5,7 @@
  */
 package project222;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -381,7 +382,12 @@ public class addRemovePersonelScreen extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String mail = (String)removepol.getSelectedItem();
         mail = mail.substring(mail.indexOf("=")+1);
-        manager.removePersonel(Company.hospitalWorkers.get(mail));
+        try {
+            manager.removePersonel(Company.hospitalWorkers.get(mail));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

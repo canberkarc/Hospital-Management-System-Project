@@ -5,6 +5,7 @@
  */
 package project222;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.UUID;
 
@@ -40,23 +41,33 @@ public class Manager extends HospitalWorkers{
     
     
     
-    public void addPersonel(HospitalWorkers worker){
+    public void addPersonel(HospitalWorkers worker) throws IOException{
         Company.persons.add(worker);
         Company.hospitalWorkersData.put(worker.getEmail(),worker.getPassword());
         Company.hospitalWorkers.put(worker.getEmail(), worker);
+        Company.savePersons();
     }
-    public void removePersonel(HospitalWorkers worker){
+    public void removePersonel(HospitalWorkers worker) throws IOException{
         Company.persons.remove(worker);
         Company.hospitalWorkersData.remove(worker.getEmail());
         Company.hospitalWorkers.remove(worker.getEmail());
+        Company.savePersons();
     }
-    public void editPersonel(HospitalWorkers old , HospitalWorkers cur){
+    public void editPersonel(HospitalWorkers old , HospitalWorkers cur) throws IOException{
         Company.persons.add(cur);
         Company.hospitalWorkersData.put(cur.getEmail(),cur.getPassword());
         Company.hospitalWorkers.put(cur.getEmail(), cur);
         Company.hospitalWorkers.remove(old.getEmail());
         Company.persons.remove(old);
         Company.hospitalWorkersData.remove(old.getEmail());
+        Company.savePersons();
     }
     
+    @Override
+    public String saveFormat() {
+        StringBuilder strBuild = new StringBuilder(super.saveFormat());
+        strBuild.append(";");
+        strBuild.append("M");
+        return strBuild.toString();
+    }
 }

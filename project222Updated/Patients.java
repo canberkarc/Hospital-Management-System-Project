@@ -93,5 +93,13 @@ public class Patients extends Person{
     public String toString() {
         return super.toString() + "discharged=" + discharged + ", appointments=" + appointments + ", covid=" + covid + ", vaccinated=" + vaccinated;
     }
+
+    @Override
+    public String saveFormat() {
+        StringBuilder strBuild = new StringBuilder(super.saveFormat());
+        strBuild.append(";");
+        strBuild.append("-").append(";").append("-").append(";").append("P");
+        return strBuild.toString();
+    }
     
 }

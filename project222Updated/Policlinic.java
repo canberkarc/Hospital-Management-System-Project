@@ -1,4 +1,4 @@
-package project222;
+//package project222;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -221,4 +221,29 @@ public class Policlinic extends Departments{
         return false;
     }
 
+    @Override
+    public String saveFormat() {
+        StringBuilder strBuild = new StringBuilder(super.saveFormat());
+        strBuild.append(";").append(getName()).append(";");
+        for(int i = 0; i < doctors.size(); ++i){
+            strBuild.append(doctors.get(i).getId());
+            if(i != doctors.size() - 1)
+                strBuild.append("%");
+        }
+        strBuild.append(";");
+        for(int i = 0; i < nurses.size(); ++i){
+            strBuild.append(nurses.get(i).getId());
+            if(i != nurses.size() - 1)
+                strBuild.append("%");
+        }
+        strBuild.append(";");
+        for(int i = 0; i < patients.size(); ++i){
+            strBuild.append(patients.get(i).getId());
+            if(i != patients.size() - 1)
+                strBuild.append("%");
+        }
+        strBuild.append(";");
+        strBuild.append("P");
+        return strBuild.toString();
+    }
 }

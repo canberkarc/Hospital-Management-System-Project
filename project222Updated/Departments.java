@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project222;
+///package project222;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author grup15
  */
-public abstract class Departments {
+public abstract class Departments implements DatabaseComponent{
     private ArrayList<HospitalWorkers> workers = new ArrayList<>();
     
     
@@ -62,5 +62,10 @@ public abstract class Departments {
         return "Departments{" + "id=" + id + '}';
     }
     
-    
+    @Override
+    public String saveFormat() {
+        StringBuilder strBuild = new StringBuilder();
+        strBuild.append(id);
+        return strBuild.toString();
+    }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project222;
+//package project222;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,10 +67,10 @@ public class Patients extends Person{
         super(name, surname, id, dateOfBirth);
     }
 
-    @Override
+    /*@Override
     public int compareTo(Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
     
     public String showRecords() {
         String res = "";

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project222;
+//package project222;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,13 +26,10 @@ public class LabPersonelScreen extends javax.swing.JFrame {
         LocalDateTime now = LocalDateTime.now();  
         date.setText(dtf.format(now));
         
-        for(int i = 0 ;i< Company.departments.size();i++){
-            if(Company.departments.get(i) instanceof Lab){
-                Queue<Patients> temp = ((Lab)Company.departments.get(i)).getPatientsToTest();
-                
-                while (temp.size() > 0) {                    
-                    patients.addItem(temp.poll().getId());
-                }
+        for(Queue<Appointment> appos:Company.appointmets){
+            for(Appointment appo:appos){
+                if(!appo.getPatient().isDischarged())
+                patients.addItem(appo.getPatient().getId());
             }
         }
     }
@@ -165,6 +162,15 @@ public class LabPersonelScreen extends javax.swing.JFrame {
                 labPersonnel.makeTests((Patients)Company.persons.get(i));
                 patients.removeItemAt(patients.getSelectedIndex());
                 
+                /*
+                for(Queue<Appointment> appos:Company.appointmets){
+                    for(Appointment appo:appos){
+                        if(!appo.getPatient().isDischarged())
+                        patients.addItem(appo.getPatient().getId());
+                    }
+                }
+                
+                
                 
                 for(int j = 0 ;j< Company.departments.size();j++){
                     if(Company.departments.get(j) instanceof Lab){
@@ -172,10 +178,9 @@ public class LabPersonelScreen extends javax.swing.JFrame {
                         if(temp.contains((Patients)Company.persons.get(i))){
                             ((Lab)Company.departments.get(j)).getPatientsToTest().remove((Patients)Company.persons.get(i));
                         }
-                        
                     }
                 }
-                
+                */
                 
                 JOptionPane.showMessageDialog(null, "test confirmed","info",JOptionPane.INFORMATION_MESSAGE);
                 return;

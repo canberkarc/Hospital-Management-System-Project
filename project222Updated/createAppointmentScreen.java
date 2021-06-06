@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project222;
+//package project222;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -354,6 +355,11 @@ public class createAppointmentScreen extends javax.swing.JFrame {
             
             
             Appointment app = new Appointment(poli, doct, patient, new Date(Integer.valueOf((String)year.getSelectedItem()), Integer.valueOf((String)month.getSelectedItem()), Integer.valueOf((String)day.getSelectedItem())));
+            try {
+                Company.addAppointmentToDataBase(app);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "please fill the information correctly","Info",JOptionPane.ERROR_MESSAGE);
         }

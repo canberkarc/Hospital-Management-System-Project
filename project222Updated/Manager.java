@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project222;
+//package project222;
 
 import java.io.IOException;
 import java.util.Date;
@@ -18,14 +18,17 @@ public class Manager extends HospitalWorkers{
     public Manager(String name, String surname, String id, Date dateOfBirth,String email , String password) {
         super(name, surname, id, dateOfBirth,email , password);
     }
-    public void addClinic(String name , int id , String phone,Departments department){
+    public void addClinic(String name , int id , String phone,Departments department) throws IOException{
         Policlinic cl = new Policlinic(name, 10, 10, 10, id);
         Company.departments.add(cl);
+        Company.saveDepartments();
     }
-    public void removeClinic(int id){
+    public void removeClinic(int id) throws IOException{
         for(int i = 0;i< Company.departments.size();i++){
-            if(Company.departments.get(i) instanceof Policlinic && Company.departments.get(i).getId() == id)
+            if(Company.departments.get(i) instanceof Policlinic && Company.departments.get(i).getId() == id){
                 Company.departments.remove(i);
+                Company.saveDepartments();
+            }
         }
     }
     public String checkPatients(){

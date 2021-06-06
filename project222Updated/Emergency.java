@@ -1,4 +1,4 @@
-package project222;
+//package project222;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ArrayList;
@@ -19,6 +19,36 @@ public class Emergency extends Departments{
         this.doctors = doctors;
         this.nurses = nurses;
         this.patients = patients;
+    }
+
+    public boolean addDoctor (Doctor newDoctor) {
+        return doctors.add(newDoctor);
+    }
+
+    public Doctor removeDoctor (int index) {
+        if (index < 0 || index > doctors.size())
+            throw new IndexOutOfBoundsException();
+        return doctors.remove(index);
+    }
+
+    public boolean addNurse (Nurse newNurse) {
+        return nurses.add(newNurse);
+    }
+
+    public Nurse removeNurse (int index) {
+        if (index < 0 || index > nurses.size())
+            throw new IndexOutOfBoundsException();
+        return nurses.remove(index);
+    }
+
+    public boolean addPatient (Patients newPatient) {
+        return patients.add(newPatient);
+    }
+
+    public Patients removePatient (int index) {
+        if (index < 0 || index > patients.size())
+            throw new IndexOutOfBoundsException();
+        return patients.remove(index);
     }
 
     public String getName(){
@@ -183,4 +213,28 @@ public class Emergency extends Departments{
         return str;
     }
 
+    @Override
+    public String saveFormat() {
+        StringBuilder strBuild = new StringBuilder(super.saveFormat());
+        strBuild.append(";");
+        for(int i = 0; i < doctors.size(); ++i){
+            strBuild.append(doctors.get(i).getId());
+            if(i != doctors.size() - 1)
+                strBuild.append("%");
+        }
+        strBuild.append(";");
+        for(int i = 0; i < nurses.size(); ++i){
+            strBuild.append(nurses.get(i).getId());
+            if(i != nurses.size() - 1)
+                strBuild.append("%");
+        }
+        strBuild.append(";");
+        for(int i = 0; i < patients.size(); ++i){
+            strBuild.append(patients.get(i).getId());
+            if(i != patients.size() - 1)
+                strBuild.append("%");
+        }
+        strBuild.append(";E");
+        return strBuild.toString();
+    }
 }

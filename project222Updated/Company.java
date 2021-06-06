@@ -3,20 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project222;
+//package project222;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeSet;
@@ -27,6 +33,7 @@ import java.util.TreeSet;
  */
 public class Company {
     private static final String personDataFile = ".\\Database\\users.txt";
+    private static final String departmentDataFile = ".\\Database\\departments.txt";
     static String name;
     
     
@@ -55,10 +62,26 @@ public class Company {
             return val;
         }
     }
+
+    private enum DepartmentDataPart{
+        ID(0),
+        NAME(1),
+        MAINPERSONNEL(2),
+        HELPERPERSONNEL(3),
+        PATIENTS(4),
+        TYPE(5);
+
+        private final int val;
+        private DepartmentDataPart(int val){
+            this.val = val;
+        }
+        public int getValue(){
+            return val;
+        }
+    }
     
-    public Company(String name) throws IOException {
+    public Company(String name){
         this.name = name;
-        loadPersons();
     }
     
     public void saveDay(){
@@ -151,5 +174,147 @@ public class Company {
         Calendar cal = Calendar.getInstance() ;
         cal.set(Integer.parseInt(part[0]), Integer.parseInt(part[1]), Integer.parseInt(part[2]));
         return cal.getTime();
+    }
+
+    public static void saveDepartments() throws IOException{
+        File datab = new File(departmentDataFile);
+        BufferedWriter bwriter = new BufferedWriter(new FileWriter(datab));
+        for(Departments d : departments){
+            bwriter.write(d.saveFormat());
+            bwriter.newLine();
+        }
+        bwriter.close();
+    }
+
+    public static void loadDepartments() throws IOException{
+        FileSplitter fsplit = new FileSplitter(departmentDataFile, ";");
+        List<String> line = fsplit.nextLine();
+        while(line != null && !line.isEmpty()){
+            Departments department = createDepartment(line);
+            departments.add(department);
+            line = fsplit.nextLine();
+        }
+        if(line != null)
+            fsplit.nextLine();
+    }
+
+    private static Departments createDepartment(List<String> line){
+        Departments returnVal = null;
+        if(line.get(DepartmentDataPart.TYPE.getValue()).equals("P")){
+            String doctorLine = line.get(DepartmentDataPart.MAINPERSONNEL.getValue());
+            String[] doctors = doctorLine.split("%");
+            String nurseLine = line.get(DepartmentDataPart.HELPERPERSONNEL.getValue());
+            String[] nurses = nurseLine.split("%");
+            String patientLine = line.get(DepartmentDataPart.PATIENTS.getValue());
+            String[] patients = patientLine.split("%");
+            Policlinic pol = new Policlinic(line.get(DepartmentDataPart.NAME.getValue()), doctors.length, nurses.length, patients.length, Integer.parseInt(line.get(DepartmentDataPart.ID.getValue())));
+            pol.setId(Integer.parseInt(line.get(DepartmentDataPart.ID.getValue())));
+            for(int i = 0; i < doctors.length; ++i)
+                pol.addDoctor((Doctor) hospitalWorkers.get(doctors[i]));
+            for(int i = 0; i < nurses.length; ++i)
+                pol.addNurse((Nurse) hospitalWorkers.get(nurses[i]));
+            for(int i = 0; i < patients.length; ++i){
+                Patients pat = findPatient(patients[i]);
+                if(pat != null)
+                    pol.addPatient(pat);
+            }
+            returnVal = pol;
+        }
+        else if(line.get(DepartmentDataPart.TYPE.getValue()).equals("E")){
+            String doctorLine = line.get(DepartmentDataPart.MAINPERSONNEL.getValue());
+            String[] doctors = doctorLine.split("%");
+            String nurseLine = line.get(DepartmentDataPart.HELPERPERSONNEL.getValue());
+            String[] nurses = nurseLine.split("%");
+            String patientLine = line.get(DepartmentDataPart.PATIENTS.getValue());
+            String[] patients = patientLine.split("%");
+            Emergency pol = new Emergency(Integer.parseInt(line.get(DepartmentDataPart.ID.getValue())), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+            pol.setId(Integer.parseInt(line.get(DepartmentDataPart.ID.getValue())));
+            for(int i = 0; i < doctors.length; ++i)
+                pol.addDoctor((Doctor) hospitalWorkers.get(doctors[i]));
+            for(int i = 0; i < nurses.length; ++i)
+                pol.addNurse((Nurse) hospitalWorkers.get(nurses[i]));
+            for(int i = 0; i < patients.length; ++i){
+                Patients pat = findPatient(patients[i]);
+                if(pat != null)
+                    pol.addPatient(pat);
+            }
+            returnVal = pol;
+        }
+        else if(line.get(DepartmentDataPart.TYPE.getValue()).equals("L")){
+            String patientLine = line.get(DepartmentDataPart.PATIENTS.getValue());
+            String[] patients = patientLine.split("%");
+            Lab pol = new Lab(Integer.parseInt(line.get(DepartmentDataPart.ID.getValue())));
+            pol.setId(Integer.parseInt(line.get(DepartmentDataPart.ID.getValue())));
+            for(int i = 0; i < patients.length; ++i){
+                Patients pat = findPatient(patients[i]);
+                if(pat != null)
+                    pol.addPatient(pat);
+            }
+            returnVal = pol;
+        }
+        else if(line.get(DepartmentDataPart.TYPE.getValue()).equals("R")){
+            String recPersonnelLine = line.get(DepartmentDataPart.MAINPERSONNEL.getValue());
+            String[] recPersonnels = recPersonnelLine.split("%");
+            Reception pol = new Reception(Integer.parseInt(line.get(DepartmentDataPart.ID.getValue())));
+            pol.setId(Integer.parseInt(line.get(DepartmentDataPart.ID.getValue())));
+            for(int i = 0; i < recPersonnels.length; ++i){
+                pol.addPersonnel((RecordPersonel) hospitalWorkers.get(recPersonnels[i]));
+            }
+            returnVal = pol;
+        }
+
+        return returnVal;
+    }
+    public static Patients findPatient(String id){
+        TreeSet<Patients> patientsTree = (TreeSet<Patients>) patientsData;
+        Patients patToFind = new Patients(null, null, id, null);
+
+        Patients found = patientsTree.ceiling(patToFind);
+        if(found.equals(patToFind))
+            return found;
+        return null;
+    }
+
+    public static Departments findDepartment(int id){
+        for(Departments d : departments)
+            if(d.getId() == id)
+                return d;
+
+        return null;
+    }
+
+    public static void addAppointmentToDataBase(Appointment a) throws IOException{
+        SimpleDateFormat smpf = new SimpleDateFormat("dd-MM-yyyy");
+        String filename = ".\\Database\\Appointment\\" + smpf.format(a.getDate()) + ".txt";
+        System.out.println(filename);
+        File f = new File(filename);
+        Queue<Appointment> apps = new LinkedList<>();
+        if(f.exists()){
+            FileSplitter fsplit = new FileSplitter(f.getName(), ";");
+            List<String> strList = fsplit.nextLine();
+            while(strList != null && !strList.isEmpty()){
+                apps.offer(createAppointment(strList));
+                strList = fsplit.nextLine();
+            }
+            apps.offer(a);
+            BufferedWriter bwrite = new BufferedWriter(new FileWriter(f));
+        
+            while(!apps.isEmpty()){
+                bwrite.write(apps.poll().saveFormat());
+                bwrite.newLine();
+            }
+            bwrite.close();
+        }else{
+            if(f.createNewFile()){
+                BufferedWriter bwrite = new BufferedWriter(new FileWriter(f));
+                bwrite.write(a.saveFormat());
+                bwrite.close();
+            }
+        }
+    }
+
+    private static Appointment createAppointment(List<String> line){
+        return new Appointment((Policlinic)findDepartment(Integer.parseInt(line.get(0))), (Doctor)hospitalWorkers.get(line.get(1)),
+                                         findPatient(line.get(2)), createDate(line.get(3)));
     }
 }

@@ -1,5 +1,5 @@
 
-package project222;
+//package project222;
 
 import java.io.*;
 import java.lang.*;
@@ -175,5 +175,21 @@ public class Lab extends Departments
 		}
 		return res;
 	}
+
+	@Override
+    public String saveFormat() {
+        StringBuilder strBuild = new StringBuilder(super.saveFormat());
+        strBuild.append(";");
+		strBuild.append(name).append(";");
+        strBuild.append(";-;-;");
+		Patients[] patients = patientsToTest.toArray(new Patients[0]);
+        for(int i = 0; i < patients.length; ++i){
+            strBuild.append(patients[i].getId());
+            if(i != patients.length - 1)
+                strBuild.append("%");
+        }
+		strBuild.append("L");
+        return strBuild.toString();
+    }
 
 }

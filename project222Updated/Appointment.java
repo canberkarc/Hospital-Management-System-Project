@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project222;
+//package project222;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.management.loading.PrivateMLet;
 
@@ -12,7 +13,7 @@ import javax.management.loading.PrivateMLet;
  *
  * @author omera
  */
-public class Appointment implements Comparable<Appointment>{
+public class Appointment implements Comparable<Appointment>, DatabaseComponent{
     private Policlinic poli;
     private Doctor doct;
     private Patients patient;
@@ -94,6 +95,20 @@ public class Appointment implements Comparable<Appointment>{
         if(date.getTime() < o.getDate().getTime())
             return -1;
         return 0;
+    }
+
+    @Override
+    public String saveFormat() {
+        SimpleDateFormat smpf = new SimpleDateFormat("dd/MM/yyyy");
+        StringBuilder strBuild = new StringBuilder();
+        strBuild.append(poli.getId()).append(";");
+        strBuild.append(doct.getId()).append(";");
+        strBuild.append(patient.getId()).append(";");
+        strBuild.append(smpf.format(getDate())).append(";");
+        strBuild.append(note).append(";");
+        strBuild.append(recipe).append(";");
+        strBuild.append(surgeon);
+        return strBuild.toString();
     }
     
     

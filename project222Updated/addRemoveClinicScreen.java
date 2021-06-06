@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project222;
+//package project222;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
@@ -312,7 +313,12 @@ public class addRemoveClinicScreen extends javax.swing.JFrame {
                 counter++;
             }
         }
-        manager.removeClinic(temp.getId());
+        try {
+            manager.removeClinic(temp.getId());
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
         try {
             //Policlinic pol = new Policlinic(editname.getText(), 20, 20, 20, Integer.valueOf(editid.getText()));
             manager.addClinic(editname.getText(), Integer.valueOf(editid.getText()), edittel.getText(), temp);

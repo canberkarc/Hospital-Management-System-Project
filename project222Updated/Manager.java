@@ -18,7 +18,7 @@ public class Manager extends HospitalWorkers{
     public Manager(String name, String surname, String id, Date dateOfBirth,String email , String password) {
         super(name, surname, id, dateOfBirth,email , password);
     }
-    public void addClinic(String name , int id , String phone,Departments department) throws IOException{
+    public void addClinic(String name , int id , String phone) throws IOException{
         Policlinic cl = new Policlinic(name, 10, 10, 10, id);
         Company.departments.add(cl);
         Company.saveDepartments();
@@ -48,12 +48,14 @@ public class Manager extends HospitalWorkers{
         Company.persons.add(worker);
         Company.hospitalWorkersData.put(worker.getEmail(),worker.getPassword());
         Company.hospitalWorkers.put(worker.getEmail(), worker);
+        Company.hospitalWorkerswithId.put(worker.getId(),worker);
         Company.savePersons();
     }
     public void removePersonel(HospitalWorkers worker) throws IOException{
         Company.persons.remove(worker);
         Company.hospitalWorkersData.remove(worker.getEmail());
         Company.hospitalWorkers.remove(worker.getEmail());
+        Company.hospitalWorkerswithId.remove(worker.getId());
         Company.savePersons();
     }
     public void editPersonel(HospitalWorkers old , HospitalWorkers cur) throws IOException{

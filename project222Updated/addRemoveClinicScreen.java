@@ -321,7 +321,7 @@ public class addRemoveClinicScreen extends javax.swing.JFrame {
         }
         try {
             //Policlinic pol = new Policlinic(editname.getText(), 20, 20, 20, Integer.valueOf(editid.getText()));
-            manager.addClinic(editname.getText(), Integer.valueOf(editid.getText()), edittel.getText(), temp);
+            manager.addClinic(editname.getText(), Integer.valueOf(editid.getText()), edittel.getText());
             this.dispose();
         } 
         catch (Exception e) {
@@ -337,7 +337,7 @@ public class addRemoveClinicScreen extends javax.swing.JFrame {
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         try {
             
-            manager.addClinic(addname.getText(), Integer.valueOf(addid.getText()), addphone.getText(), null);
+            manager.addClinic(addname.getText(), Integer.valueOf(addid.getText()), addphone.getText());
             this.dispose();
         } 
         catch (Exception e) {

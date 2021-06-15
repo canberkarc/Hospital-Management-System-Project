@@ -110,6 +110,11 @@ public class Appointment implements Comparable<Appointment>, DatabaseComponent{
         strBuild.append(surgeon);
         return strBuild.toString();
     }
+
+    @Override
+    public String toString() {
+        return "Appointment{" + "poli=" + poli + ", doct=" + doct + ", \npatient=" + patient + ", note=" + note + ", date=" + date + ", \nrecipe=" + recipe + ", surgeon=" + surgeon + '}';
+    }
     
     
 }

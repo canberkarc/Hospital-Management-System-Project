@@ -365,6 +365,8 @@ public class createAppointmentScreen extends javax.swing.JFrame {
             Appointment app = new Appointment(poli, doct, patient, Company.createDate(dateStr));
             try {
                 Company.addAppointmentToDataBase(app);
+                Company.appointmets.get(clinics.getSelectedIndex()).add(app);
+                JOptionPane.showMessageDialog(null, "Added to system","Info",JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
                 e.printStackTrace();
             }

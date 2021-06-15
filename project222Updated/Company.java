@@ -44,7 +44,8 @@ public class Company {
     static List<PriorityQueue<Appointment>> appointmets = new ArrayList<>();
     static Stack<Appointment>  history = new Stack<>();
     static Map<String,String> hospitalWorkersData =  new HashMap<>();//mail , password
-    static Map<String,HospitalWorkers> hospitalWorkers =  new HashMap<>();//mail , password
+    static Map<String,HospitalWorkers> hospitalWorkers =  new HashMap<>();//mail worker
+    static Map<String,HospitalWorkers> hospitalWorkerswithId =  new HashMap<>();//id , worker
     static Set<Patients> patientsData = new TreeSet<>();
 
     private enum DataPart{
@@ -84,6 +85,7 @@ public class Company {
     
     public Company(String name){
         this.name = name;
+        Company.appointmets.add(new PriorityQueue<Appointment>());
     }
     
     public void saveDay(){
@@ -214,8 +216,8 @@ public class Company {
             departments.add(department);
             line = fsplit.nextLine();
         }
-        if(line != null)
-            fsplit.nextLine();
+        /*if(line != null)
+            fsplit.nextLine();*/
     }
 
     private static Departments createDepartment(List<String> line){

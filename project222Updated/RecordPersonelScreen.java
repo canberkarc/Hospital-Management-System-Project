@@ -299,31 +299,35 @@ public class RecordPersonelScreen extends javax.swing.JFrame {
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         try {
             Policlinic tempPol = null;
-        Doctor tempDoc = null;
-        int counter = 0;
-        for(int i = 0;i< Company.departments.size();i++){
-            if(Company.departments.get(i) instanceof Policlinic){
-                if(counter == clinics.getSelectedIndex()){
-                    tempPol = (Policlinic)Company.departments.get(i);
-                    break;
+            Doctor tempDoc = null;
+            int counter = 0;
+            for(int i = 0;i< Company.departments.size();i++){
+                if(Company.departments.get(i) instanceof Policlinic){
+                    if(counter == clinics.getSelectedIndex()){
+                        tempPol = (Policlinic)Company.departments.get(i);
+                        break;
+                    }
+                    counter++;
                 }
-                counter++;
             }
-        }
-        counter = 0;
-        for(int i = 0;i< Company.persons.size();i++){
-            if(Company.persons.get(i) instanceof Doctor){
-                if(counter == doctors.getSelectedIndex()){
-                    tempDoc = (Doctor)Company.persons.get(i);
-                    break;
+            counter = 0;
+            for(int i = 0;i< Company.persons.size();i++){
+                if(Company.persons.get(i) instanceof Doctor){
+                    if(counter == doctors.getSelectedIndex()){
+                        tempDoc = (Doctor)Company.persons.get(i);
+                        break;
+                    }
+                    counter++;
                 }
-                counter++;
             }
-        }
-        Patients patient = new Patients(name.getText(), surname.getText(), id.getText(), null );
-        recordPersonel.addPatient(patient);
-        
+            Patients patient = new Patients(name.getText(), surname.getText(), id.getText(), null );
+            recordPersonel.addPatient(patient);
+            JOptionPane.showMessageDialog(null, "Added Succesfully","Info",JOptionPane.INFORMATION_MESSAGE);
+            
+            
         tempDoc.addAppointment(new Appointment(tempPol, tempDoc, patient, new SimpleDateFormat("dd/MM/yyyy").parse(dater.getText())));
+
+        Company.savePersons();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please fill the informations correctly","Info",JOptionPane.ERROR_MESSAGE);
         }

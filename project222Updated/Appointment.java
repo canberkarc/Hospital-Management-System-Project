@@ -99,7 +99,7 @@ public class Appointment implements Comparable<Appointment>, DatabaseComponent{
 
     @Override
     public String saveFormat() {
-        SimpleDateFormat smpf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat smpf = new SimpleDateFormat("dd-MM-yyyy");
         StringBuilder strBuild = new StringBuilder();
         strBuild.append(poli.getId()).append(";");
         strBuild.append(doct.getId()).append(";");

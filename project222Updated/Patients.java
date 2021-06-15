@@ -47,6 +47,12 @@ public class Patients extends Person{
         this.appointments = appointments;
     }
 
+    public void addAppointment(Appointment app){
+        if(app == null)
+            throw new NullPointerException();
+        appointments.add(app);
+    }
+
     public ArrayList<Test> getTests() {
         return tests;
     }

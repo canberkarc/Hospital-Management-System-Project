@@ -44,4 +44,8 @@ public class FileSplitter {
         }
         return Arrays.asList(line.split(splitStr));
     }
+
+    public void close() throws IOException{
+        file.close();
+    }
 }

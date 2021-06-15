@@ -8,6 +8,8 @@
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -21,12 +23,20 @@ public class Project222 {
      */
     public static void main(String[] args) throws ParseException {
         try {
+            
             Company.loadPersons();
+            Company.loadDepartments();
+            
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        Doctor doctor = new Doctor("ali", "veli", "1", new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998"), "1", "1");
+        /*try{
+            Company.loadAppointment(Company.getCurrentDate());
+        }catch(IOException e){
+            System.out.println("No appointments today!");
+        }*/
+        /*Doctor doctor = new Doctor("ali", "veli", "1", new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998"), "1", "1");
         Nurse nurse = new Nurse("ali", "veli", "1", new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998"), "2", "2");
         LabPersonnel labpers = new LabPersonnel("ali", "veli", "1", new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998"), "3", "3");
         Manager manager = new Manager("ali", "veli", "1", new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1998"), "4", "4");
@@ -45,7 +55,7 @@ public class Project222 {
         Company.hospitalWorkersData.put(manager.getEmail(), manager.getPassword());
         
         Company.hospitalWorkers.put(recordPersonel.getEmail(), recordPersonel);
-        Company.hospitalWorkersData.put(recordPersonel.getEmail(), recordPersonel.getPassword());
+        Company.hospitalWorkersData.put(recordPersonel.getEmail(), recordPersonel.getPassword());*/
         
         
         

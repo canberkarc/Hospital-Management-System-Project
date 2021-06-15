@@ -324,7 +324,7 @@ public class createAppointmentScreen extends javax.swing.JFrame {
             
             for(Departments d : Company.departments){
             if(d instanceof Policlinic){
-                if(((Policlinic)d).getName().equals(poli)){
+                if(((Policlinic)d).getName().equals(poliname)){
                     poli = ((Policlinic)d);
                     break;
                 }
@@ -349,12 +349,20 @@ public class createAppointmentScreen extends javax.swing.JFrame {
                 }
             }
             
-            if(isnew)
+            if(isnew){
                 Company.patientsData.add(patient);
+                Company.persons.add(patient);
+                try {
+                    Company.savePersons();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
             
-            
-            
-            Appointment app = new Appointment(poli, doct, patient, new Date(Integer.valueOf((String)year.getSelectedItem()), Integer.valueOf((String)month.getSelectedItem()), Integer.valueOf((String)day.getSelectedItem())));
+            String dateStr = (String) day.getSelectedItem() + "-" + (String) month.getSelectedItem() + "-" + (String) year.getSelectedItem();
+            System.out.println(dateStr);
+            Appointment app = new Appointment(poli, doct, patient, Company.createDate(dateStr));
             try {
                 Company.addAppointmentToDataBase(app);
             } catch (IOException e) {

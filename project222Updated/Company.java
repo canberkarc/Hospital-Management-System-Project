@@ -8,6 +8,7 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,6 +35,7 @@ import java.util.TreeSet;
 public class Company {
     private static final String personDataFile = ".\\Database\\users.txt";
     private static final String departmentDataFile = ".\\Database\\departments.txt";
+    private static final String dayFile = ".\\Database\\day.txt";
     static String name;
     
     
@@ -110,11 +112,12 @@ public class Company {
                 HospitalWorkers hworker = (HospitalWorkers) person;
                 hospitalWorkersData.put(hworker.getEmail(), hworker.getPassword());
                 hospitalWorkers.put(hworker.getEmail(), hworker);
+            }else{
+                Patients pat = (Patients) person;
+                patientsData.add(pat);
             }
             line = fsplit.nextLine();
         }
-        if(line != null)
-            fsplit.nextLine();
     }
 
     private static Person createPerson(List<String> line){
@@ -169,11 +172,28 @@ public class Company {
         return returnVal;
     }
 
-    private static Date createDate(String date){
+    public static Date createDate(String date){
         String[] part = date.split("-");
         Calendar cal = Calendar.getInstance() ;
-        cal.set(Integer.parseInt(part[0]), Integer.parseInt(part[1]), Integer.parseInt(part[2]));
+        cal.set(Integer.parseInt(part[2]), Integer.parseInt(part[1]) - 1, Integer.parseInt(part[0]));
+        System.out.println(cal.getTime());
         return cal.getTime();
+    }
+
+    public static Date getCurrentDate() throws IOException{
+        File dayf = new File(dayFile);
+        BufferedReader breader = new BufferedReader(new FileReader(dayf));
+        String day = breader.readLine();
+        breader.close();
+        return createDate(day);
+    }
+
+    public static void updateCurrentDate(Date date) throws IOException{
+        File dayf = new File(dayFile);
+        BufferedWriter bwriter = new BufferedWriter(new FileWriter(dayf));
+        bwriter.write(dateToString(date));
+        bwriter.close();
+        loadAppointment(date);
     }
 
     public static void saveDepartments() throws IOException{
@@ -270,7 +290,7 @@ public class Company {
         Patients patToFind = new Patients(null, null, id, null);
 
         Patients found = patientsTree.ceiling(patToFind);
-        if(found.equals(patToFind))
+        if(found != null && found.equals(patToFind))
             return found;
         return null;
     }
@@ -283,9 +303,14 @@ public class Company {
         return null;
     }
 
-    public static void addAppointmentToDataBase(Appointment a) throws IOException{
+    private static String dateToString(Date date){
         SimpleDateFormat smpf = new SimpleDateFormat("dd-MM-yyyy");
-        String filename = ".\\Database\\Appointment\\" + smpf.format(a.getDate()) + ".txt";
+        return smpf.format(date);
+    }
+
+    public static void addAppointmentToDataBase(Appointment a) throws IOException{
+        System.out.println(dateToString(a.getDate()));
+        String filename = ".\\Database\\Appointment\\" + dateToString(a.getDate()) + ".txt";
         System.out.println(filename);
         File f = new File(filename);
         Queue<Appointment> apps = new LinkedList<>();
@@ -311,6 +336,21 @@ public class Company {
                 bwrite.close();
             }
         }
+    }
+
+    public static void loadAppointment(Date date) throws IOException{
+        SimpleDateFormat smpf = new SimpleDateFormat("dd-MM-yyyy");
+        String filename = ".\\Database\\Appointment\\" + smpf.format(date) + ".txt";
+        FileSplitter fsplit = new FileSplitter(filename, ";");
+        List<String> line = fsplit.nextLine();
+        while(line != null && !line.isEmpty()){
+            Appointment app = createAppointment(line);
+            app.getPatient().addAppointment(app);
+            app.getDoct().addAppointment(app);
+            line = fsplit.nextLine();
+        }
+        if(line != null)
+            fsplit.nextLine();
     }
 
     private static Appointment createAppointment(List<String> line){

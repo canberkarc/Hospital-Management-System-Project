@@ -23,7 +23,7 @@ public abstract class Departments implements DatabaseComponent{
     private int id;
 
     /**
-    *   Constructor\
+    *   Constructor
     * @param id
     */ 
     public Departments(int id) {

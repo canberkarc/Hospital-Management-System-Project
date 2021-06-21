@@ -12,33 +12,52 @@ import java.util.ArrayList;
  * @author grup15
  */
 public abstract class Departments implements DatabaseComponent{
+    /**
+    * List to keep hospital workers
+    */
     private ArrayList<HospitalWorkers> workers = new ArrayList<>();
     
-    
+    /**
+    * Department id
+    */
     private int id;
 
+    /**
+    *   Constructor\
+    * @param id
+    */ 
     public Departments(int id) {
         this.id = id;
     }
 
+    /**
+    * Getter of workers list
+    */
     public ArrayList<HospitalWorkers> getWorkers() {
         return workers;
     }
 
+    /**
+    * Setter of workers list
+    */
     public void setWorkers(ArrayList<HospitalWorkers> workers) {
         this.workers = workers;
     }
 
-
+    /** Getter of department id
+    */
     public int getId() {
         return id;
     }
 
+    /** Setter of department id
+    */
     public void setId(int id) {
         this.id = id;
     }
 
-
+    /** equals method
+    */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -57,11 +76,15 @@ public abstract class Departments implements DatabaseComponent{
         return true;
     }
 
+    /** toString method
+    */
     @Override
     public String toString() {
         return "Departments{" + "id=" + id + '}';
     }
     
+    /** Method to save format
+    */
     @Override
     public String saveFormat() {
         StringBuilder strBuild = new StringBuilder();

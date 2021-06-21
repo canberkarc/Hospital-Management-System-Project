@@ -38,7 +38,7 @@ public class Company {
     private static final String dayFile = ".\\Database\\day.txt";
     static String name;
     
-    
+    static Graph<Departments> departmentsGraph = new Graph<>();
     static List<Person> persons = new ArrayList<>();
     static List<Departments> departments = new ArrayList<>();
     static List<PriorityQueue<Appointment>> appointmets = new ArrayList<>();

@@ -8,6 +8,7 @@
 import java.io.IOException;
 import java.util.Date;
 import java.util.UUID;
+import java.util.Random;
 
 /**
  *
@@ -38,7 +39,7 @@ public class Manager extends HospitalWorkers{
     public void addClinic(String name , int id , String phone) throws IOException{
         Policlinic cl = new Policlinic(name, 10, 10, 10, id);
         Company.departments.add(cl);
-        Company.deparmentGraph.addVertex(cl);
+        Company.departmentsGraph.addVertex(cl);
         Company.saveDepartments();
     }
 
@@ -52,7 +53,7 @@ public class Manager extends HospitalWorkers{
             if(Company.departments.get(i) instanceof Policlinic && Company.departments.get(i).getId() == id){
                 Company.departments.remove(i);
                 Company.saveDepartments();
-                Company.departmentGraph.removeVertex(Company.departments.get(i));
+                Company.departmentsGraph.removeVertex(Company.departments.get(i));
             }
         }
     }
@@ -62,11 +63,12 @@ public class Manager extends HospitalWorkers{
     *   @param pol Policlinic
     */
     public void connectDepartments(Policlinic pol){
-        for(int i=0; i<departments.size(); i++){
-            int rand = Random.nextInt(2);
-            if(!pol.equals(departments.get(i))){
-                if(rand == 1 && !Company.departmentGraph.hasEdge(pol, departments.get(i))){
-                    Company.departmentGraph.addEdge(pol,departments.get(i));
+        for(int i=0; i < Company.departments.size(); i++){
+            Random ran = new Random();
+            int rand = ran.nextInt(2);
+            if(!pol.equals(Company.departments.get(i))){
+                if(rand == 1 && !Company.departmentsGraph.hasEdge(pol, Company.departments.get(i))){
+                    Company.departmentsGraph.addEdge(pol, Company.departments.get(i));
                 }
             }
         }

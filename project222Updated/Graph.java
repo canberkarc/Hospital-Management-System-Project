@@ -33,38 +33,28 @@ class Graph<E> {
 	}
 
 	/**
-	* Method to get count of clinics in graph
-	*/
-	public void getVertexCount()
-	{
-		System.out.println("The building has "
-						+ map.keySet().size()
-						+ " clinics\n");
-	}
-
-	/**
 	* Method to check whether given vertex is in graph
 	*/
-	public void hasVertex(E s)
+	public boolean hasVertex(E s)
 	{
 		if (map.containsKey(s)) {
-			System.out.println( s + " exists in the building.\n");
+			return true;
 		}
 		else {
-			System.out.println(s + " does not exist in the building.\n");
+			return false;
 		}
 	}
 
 	/**
 	* Method to check whether there is an edge between given vertices
 	*/
-	public void hasEdge(E s, E d)
+	public boolean hasEdge(E s, E d)
 	{
 		if (map.get(s).contains(d)) {
-			System.out.println(s + " and " + d + " are in the same building.\n");
+			return true;
 		}
 		else {
-			System.out.println(s + " and " + d + " are not in the same building.\n");
+			return false;
 		}
 	}
 

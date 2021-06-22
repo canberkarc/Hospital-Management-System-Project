@@ -39,7 +39,7 @@ public class Company {
     static String name;
     
     static Graph<Departments> departmentsGraph = new Graph<>();
-    static List<Person> persons = new ArrayList<>();
+    static SkipList<Person> persons = new SkipList<>();
     static List<Departments> departments = new ArrayList<>();
     static List<PriorityQueue<Appointment>> appointmets = new ArrayList<>();
     static Stack<Appointment>  history = new Stack<>();

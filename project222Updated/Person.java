@@ -13,7 +13,7 @@ import java.util.UUID;
  *
  * @author grup15
  */
-public abstract class Person implements Comparable<Object>, DatabaseComponent {
+public abstract class Person implements Comparable<Person>, DatabaseComponent {
     private String name;
     private String surname;
     private String id;
@@ -80,7 +80,7 @@ public abstract class Person implements Comparable<Object>, DatabaseComponent {
     }
 
     @Override
-    public  int compareTo(Object o){
+    public  int compareTo(Person o){
         return ((Person)o).id.compareTo(id);
     }
     

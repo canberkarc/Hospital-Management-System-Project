@@ -27,6 +27,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeSet;
+import java.util.TreeMap;
 
 /**
  *
@@ -38,14 +39,15 @@ public class Company {
     private static final String dayFile = ".\\Database\\day.txt";
     static String name;
     
+    static SkipList<String> uniquePatientsName = new SkipList<>();
     static Graph<Departments> departmentsGraph = new Graph<>();
-    static SkipList<Person> persons = new SkipList<>();
+    static List<Person> persons = new ArrayList<>();
     static List<Departments> departments = new ArrayList<>();
     static List<PriorityQueue<Appointment>> appointmets = new ArrayList<>();
     static Stack<Appointment>  history = new Stack<>();
-    static Map<String,String> hospitalWorkersData =  new HashMap<>();//mail , password
-    static Map<String,HospitalWorkers> hospitalWorkers =  new HashMap<>();//mail worker
-    static Map<String,HospitalWorkers> hospitalWorkerswithId =  new HashMap<>();//id , worker
+    static Map<String,String> hospitalWorkersData =  new TreeMap<>();//mail , password
+    static Map<String,HospitalWorkers> hospitalWorkers =  new TreeMap<>();//mail worker
+    static Map<String,HospitalWorkers> hospitalWorkerswithId =  new TreeMap<>();//id , worker
     static Set<Patients> patientsData = new TreeSet<>();
 
     private enum DataPart{

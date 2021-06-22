@@ -20,6 +20,7 @@ public class RecordPersonel extends HospitalWorkers{
 
     public void addPatient(Patients patient){
         Company.patientsData.add(patient);
+        Company.uniquePatientsName.add(patient.getName());
     }
 
     public void removePatient(Patients patient){

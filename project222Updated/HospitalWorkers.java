@@ -42,7 +42,7 @@ public abstract class HospitalWorkers extends Person{
 
 
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(Person o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

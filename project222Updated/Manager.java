@@ -69,6 +69,7 @@ public class Manager extends HospitalWorkers{
             if(!pol.equals(Company.departments.get(i))){
                 if(rand == 1 && !Company.departmentsGraph.hasEdge(pol, Company.departments.get(i))){
                     Company.departmentsGraph.addEdge(pol, Company.departments.get(i));
+                    Company.departmentsGraph.addEdge(Company.departments.get(i), pol);
                 }
             }
         }

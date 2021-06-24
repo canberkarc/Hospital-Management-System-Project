@@ -76,10 +76,18 @@ public class Manager extends HospitalWorkers{
     }
 
     public String checkPatients(){
+        ArrayList<Person> pat = new ArrayList<>(Company.persons);
+        SortAlgorithm.quick(pat, new Comparator<Person>(){
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.compareTo(o2);
+            }
+        });
+
         String res ="";
-        for(int i = 0;i<Company.persons.size();i++){
-            if(Company.persons.get(i) instanceof Patients)
-                res+= Company.persons.get(i)+"\n";
+        for(int i = 0;i<pat.size();i++){
+            if(pat.get(i) instanceof Patients)
+                res+= pat.get(i)+"\n";
         }
         return res;
     }

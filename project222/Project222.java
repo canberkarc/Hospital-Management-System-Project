@@ -26,6 +26,8 @@ public class Project222 {
             
             Company.loadPersons();
             Company.loadDepartments();
+            Company.loadAppointment(Company.getCurrentDate());
+            Company.loadTests();
             
         } catch (IOException e) {
             // TODO Auto-generated catch block

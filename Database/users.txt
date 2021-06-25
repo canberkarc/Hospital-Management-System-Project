@@ -1,3 +1,7 @@
-NAME;SURNAME;55555555555;02-01-0017;TEST@gmail.com;12345;M
-emre;ozturk;66666666666;14-06-0023;ozturk@gmail.com;12345;D
-uuuu;uuuu;2141;01-01-1992;-;-;P
+NAME;SURNAME;00000000000;01-01-1990;mail@gmail.com;123456;M
+Ahmet;Kara;11111111111;01-01-1990;akara@gmail.com;123456;D
+Hasan;Koca;22222222222;01-01-1990;hkoca@gmail.com;123456;D
+Nurse;Nurse;33333333333;01-01-1990;nurse@gmail.com;123456;N
+lab;lab;4444444444;01-01-1990;lab@gmail.com;123456;L
+rec;rec;55555555555;01-01-1990;rec@gmail.com;123456;R
+patient;patient;66666666666;01-01-1990;-;-;P

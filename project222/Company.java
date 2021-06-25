@@ -37,6 +37,7 @@ public class Company {
     private static final String personDataFile = ".\\Database\\users.txt";
     private static final String departmentDataFile = ".\\Database\\departments.txt";
     private static final String dayFile = ".\\Database\\day.txt";
+    private static final String testFile = ".\\Database\\test.txt";
     static String name;
     
     static SkipList<String> uniquePatientsName = new SkipList<>();
@@ -93,8 +94,75 @@ public class Company {
     public void saveDay(){
         
     }
+
+    public static void loadTests() throws IOException{
+        FileSplitter fsplit = new FileSplitter(testFile, ";");
+        List<String> line = fsplit.nextLine();
+        while(line != null && !line.isEmpty()){
+            Test t = createTest(line);
+            findPatient(t.getPatientID()).addTest(t);
+            line = fsplit.nextLine();
+        }
+    }
+
+    private static Test createTest(List<String> list){
+        Test returnVal = null;
+
+        if(list.get(2).equals("B")){
+            BloodTest btest = new BloodTest();
+            btest.setBloodType(list.get(3));
+            btest.setRH(list.get(4));
+            btest.setVitaminA(Integer.parseInt(list.get(5)));
+            btest.setVitaminB(Integer.parseInt(list.get(6)));
+            btest.setVitaminD(Integer.parseInt(list.get(7)));
+            btest.setVitaminE(Integer.parseInt(list.get(8)));
+            btest.setHemoglobin(Integer.parseInt(list.get(9)));
+            btest.setPotassium(Integer.parseInt(list.get(10)));
+            btest.setCalcium(Integer.parseInt(list.get(11)));
+
+            returnVal = btest;
+        }else if(list.get(2).equals("H")){
+            HormoneTest htest = new HormoneTest();
+            htest.setTSH(Integer.parseInt(list.get(3)));
+            htest.setLH(Integer.parseInt(list.get(4)));
+            htest.setProlactin(Integer.parseInt(list.get(5)));
+            htest.setCortisol(Integer.parseInt(list.get(6)));
+            htest.setT3(Integer.parseInt(list.get(7)));
+            htest.setT4(Integer.parseInt(list.get(8)));
+
+            returnVal = htest;
+        }else if(list.get(2).equals("U")){
+            UrineTest utest = new UrineTest();
+            utest.setGlucose(Integer.parseInt(list.get(3)));
+            utest.setNitrites(Integer.parseInt(list.get(4)));
+            utest.setBilirubin(Integer.parseInt(list.get(5)));
+            utest.setProtein(Integer.parseInt(list.get(6)));
+            utest.setKetones(Integer.parseInt(list.get(7)));
+            utest.setSugar(Integer.parseInt(list.get(8)));
+
+            returnVal = utest;
+        }
+
+        if(returnVal != null){
+            returnVal.setPatientsID(list.get(0));
+            returnVal.setTestDate(Company.createDate(list.get(1)));
+        }
+
+        return returnVal;
+    }
     
     
+    public static void saveTests() throws IOException{
+        File datab = new File(testFile);
+        BufferedWriter bwriter = new BufferedWriter(new FileWriter(datab));
+        for(Patients p : patientsData){
+            for(Test t : p.getTests()){
+                bwriter.write(t.saveFormat());
+                bwriter.newLine();
+            }
+        }
+        bwriter.close();
+    }
     
     public static void savePersons() throws IOException{
         File datab = new File(personDataFile);
@@ -307,7 +375,7 @@ public class Company {
         return null;
     }
 
-    private static String dateToString(Date date){
+    public static String dateToString(Date date){
         SimpleDateFormat smpf = new SimpleDateFormat("dd-MM-yyyy");
         return smpf.format(date);
     }

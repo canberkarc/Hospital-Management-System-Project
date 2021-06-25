@@ -8,7 +8,7 @@ import java.util.*;
 *  HormoneTest Class
 */
 @SuppressWarnings("serial")
-public class HormoneTest extends Test
+public class HormoneTest extends Test implements DatabaseComponent
 {
 	private int tsh;
 	private int lh;
@@ -126,4 +126,14 @@ public class HormoneTest extends Test
 				+ "\nT4 : " + String.valueOf(t4);
 	}
 
+	@Override
+	public String saveFormat() {
+		StringBuilder strBuild = new StringBuilder();
+
+		strBuild.append(getPatientID() + ";" + Company.dateToString(getTestDate()) + ";");
+		strBuild.append("H" + ";");
+		strBuild.append(getTSH() + ";" + getLH() + ";" + getProlactin() + ";" + getCortisol() + ";" + getT3() + ";" + getT4());
+
+		return strBuild.toString();
+	}
 }

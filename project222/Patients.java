@@ -22,6 +22,10 @@ public class Patients extends Person{
     private String covid="No info";
     private boolean vaccinated = false;
 
+    public void addTest(Test t){
+        tests.add(t);
+    }
+
     public String getCovid() {
         return covid;
     }
@@ -72,11 +76,6 @@ public class Patients extends Person{
     public Patients(String name, String surname, String id, Date dateOfBirth) {
         super(name, surname, id, dateOfBirth);
     }
-
-    /*@Override
-    public int compareTo(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
     
     public String showRecords() {
         String res = "";

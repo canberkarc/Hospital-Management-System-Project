@@ -8,7 +8,7 @@ import java.util.*;
 *  BloodTest Class
 */
 @SuppressWarnings("serial")
-public class BloodTest extends Test
+public class BloodTest extends Test implements DatabaseComponent
 {
 	private String bloodType;
 	private String rH;
@@ -158,6 +158,17 @@ public class BloodTest extends Test
 				+ "\nHemoglobin : " + String.valueOf(hemoglobin)
 				+ "\nPotassium : " + String.valueOf(potassium)
 				+ "\nCalcium : " + String.valueOf(calcium);
+	}
+
+	@Override
+	public String saveFormat() {
+		StringBuilder strBuild = new StringBuilder();
+
+		strBuild.append(getPatientID() + ";" + Company.dateToString(getTestDate()) + ";");
+		strBuild.append("U" + ";");
+		strBuild.append(getBloodType() + ";" + getRH() + ";" + getVitaminA() + ";" + getVitaminB() + ";" + getVitaminD() + ";" + getVitaminE() + ";" + getHemoglobin() + ";" + getPotassium() + ";" + getCalcium());
+
+		return strBuild.toString();
 	}
 
 }

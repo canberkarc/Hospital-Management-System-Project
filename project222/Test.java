@@ -10,7 +10,7 @@ import java.io.Serializable;
 *  Test Abstract Class
 */
 @SuppressWarnings("unchecked")
-public abstract class Test
+public abstract class Test implements DatabaseComponent
 {
 	private Date testDate;
 	private String patientID;
@@ -54,5 +54,5 @@ public abstract class Test
 		this.patientID = patientID;
 	}
 
-
+	
 }

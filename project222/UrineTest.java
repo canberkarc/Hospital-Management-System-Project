@@ -8,7 +8,7 @@ import java.util.*;
 *  UrineTest Class
 */
 @SuppressWarnings("unchecked")
-public class UrineTest extends Test
+public class UrineTest extends Test implements DatabaseComponent
 {
 	private int glucose;
 	private int nitrites;
@@ -112,5 +112,16 @@ public class UrineTest extends Test
 				+ "\nProtein : " + String.valueOf(protein)
 				+ "\nKetones : " + String.valueOf(ketones)
 				+ "\nSugar : " + String.valueOf(sugar);
+	}
+
+	@Override
+	public String saveFormat() {
+		StringBuilder strBuild = new StringBuilder();
+
+		strBuild.append(getPatientID() + ";" + Company.dateToString(getTestDate()) + ";");
+		strBuild.append("U" + ";");
+		strBuild.append(getGlucose() + ";" + getNitrites() + ";" + getBilirubin() + ";" + getProtein() + ";" + getKetones() + ";" + getSugar());
+
+		return strBuild.toString();
 	}
 }

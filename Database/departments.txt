@@ -1,1 +1,2 @@
-2;dermatoloji;;;;P
+1;Dahiliye;;;;P
+2;Dermatoloji;;;;P
